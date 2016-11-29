@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions targetNamespace="http://webService.rossella.alfasoft.it" xmlns:apachesoap="http://xml.apache.org/xml-soap" xmlns:impl="http://webService.rossella.alfasoft.it" xmlns:intf="http://webService.rossella.alfasoft.it" xmlns:tns1="http://bean.andrea.alfasoft.it" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<!--WSDL created by Apache Axis version: 1.4
+Built on Apr 22, 2006 (06:55:48 PDT)-->
+ <wsdl:types>
+  <schema elementFormDefault="qualified" targetNamespace="http://webService.rossella.alfasoft.it" xmlns="http://www.w3.org/2001/XMLSchema">
+   <import namespace="http://bean.andrea.alfasoft.it"/>
+   <import namespace="http://xml.apache.org/xml-soap"/>
+   <element name="nome" type="xsd:string"/>
+   <complexType name="ArrayOf_xsd_anyType">
+    <sequence>
+     <element maxOccurs="unbounded" minOccurs="0" name="item" type="xsd:anyType"/>
+    </sequence>
+   </complexType>
+   <element name="getFilmConNomeReturn" type="tns1:Film"/>
+  </schema>
+  <schema elementFormDefault="qualified" targetNamespace="http://xml.apache.org/xml-soap" xmlns="http://www.w3.org/2001/XMLSchema">
+   <import namespace="http://webService.rossella.alfasoft.it"/>
+   <import namespace="http://bean.andrea.alfasoft.it"/>
+   <complexType name="Vector">
+    <sequence>
+     <element maxOccurs="unbounded" minOccurs="0" name="item" type="xsd:anyType"/>
+    </sequence>
+   </complexType>
+  </schema>
+  <schema elementFormDefault="qualified" targetNamespace="http://bean.andrea.alfasoft.it" xmlns="http://www.w3.org/2001/XMLSchema">
+   <import namespace="http://webService.rossella.alfasoft.it"/>
+   <import namespace="http://xml.apache.org/xml-soap"/>
+   <complexType name="Film">
+    <sequence>
+     <element name="codiceFilm" nillable="true" type="xsd:string"/>
+     <element name="data" type="xsd:int"/>
+     <element name="genere" nillable="true" type="xsd:string"/>
+     <element name="generi" nillable="true" type="impl:ArrayOf_xsd_anyType"/>
+     <element name="id_film" type="xsd:long"/>
+     <element name="nomeFilm" nillable="true" type="xsd:string"/>
+     <element name="nomeRegista" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+  </schema>
+ </wsdl:types>
+
+   <wsdl:message name="getFilmConNomeRequest">
+
+      <wsdl:part element="impl:nome" name="nome">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getFilmConNomeResponse">
+
+      <wsdl:part element="impl:getFilmConNomeReturn" name="getFilmConNomeReturn">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:portType name="FilmS">
+
+      <wsdl:operation name="getFilmConNome" parameterOrder="nome">
+
+         <wsdl:input message="impl:getFilmConNomeRequest" name="getFilmConNomeRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:getFilmConNomeResponse" name="getFilmConNomeResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+   </wsdl:portType>
+
+   <wsdl:binding name="FilmSSoapBinding" type="impl:FilmS">
+
+      <wsdlsoap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+
+      <wsdl:operation name="getFilmConNome">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getFilmConNomeRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getFilmConNomeResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+   </wsdl:binding>
+
+   <wsdl:service name="FilmSService">
+
+      <wsdl:port binding="impl:FilmSSoapBinding" name="FilmS">
+
+         <wsdlsoap:address location="http://localhost:8085/SoapProgetto/services/FilmS"/>
+
+      </wsdl:port>
+
+   </wsdl:service>
+
+</wsdl:definitions>

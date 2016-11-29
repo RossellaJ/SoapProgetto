@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?><!-- Use this file to deploy some handlers/chains and services      --><!-- Two ways to do this:                                           --><!--   java org.apache.axis.client.AdminClient deploy.wsdd          --><!--      after the axis server is running                          --><!-- or                                                             --><!--   java org.apache.axis.utils.Admin client|server deploy.wsdd   --><!--      from the same directory that the Axis engine runs         --><deployment xmlns="http://xml.apache.org/axis/wsdd/" xmlns:java="http://xml.apache.org/axis/wsdd/providers/java">
+
+  <!-- Services from FilmSService WSDL service -->
+
+  <service name="FilmS" provider="java:RPC" style="document" use="literal">
+      <parameter name="wsdlTargetNamespace" value="http://webService.rossella.alfasoft.it"/>
+      <parameter name="wsdlServiceElement" value="FilmSService"/>
+      <parameter name="schemaQualified" value="http://xml.apache.org/xml-soap,http://bean.andrea.alfasoft.it,http://webService.rossella.alfasoft.it"/>
+      <parameter name="wsdlServicePort" value="FilmS"/>
+      <parameter name="className" value="it.alfasoft.rossella.webService.FilmS"/>
+      <parameter name="wsdlPortType" value="FilmS"/>
+      <parameter name="typeMappingVersion" value="1.2"/>
+      <operation xmlns:retNS="http://webService.rossella.alfasoft.it" xmlns:rtns="http://bean.andrea.alfasoft.it" name="getFilmConNome" qname="getFilmConNome" returnQName="retNS:getFilmConNomeReturn" returnType="rtns:Film" soapAction="">
+        <parameter xmlns:pns="http://webService.rossella.alfasoft.it" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:nome" type="tns:string"/>
+      </operation>
+      <parameter name="allowedMethods" value="getFilmConNome"/>
+
+      <typeMapping xmlns:ns="http://bean.andrea.alfasoft.it" qname="ns:Film" type="java:it.alfasoft.andrea.bean.Film" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle=""/>
+      <arrayMapping xmlns:ns="http://webService.rossella.alfasoft.it" xmlns:cmp-ns="http://www.w3.org/2001/XMLSchema" qname="ns:ArrayOf_xsd_anyType" type="java:java.lang.Object[]" innerType="cmp-ns:anyType" encodingStyle=""/>
+  </service>
+</deployment>
